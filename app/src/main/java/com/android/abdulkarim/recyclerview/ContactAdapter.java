@@ -19,9 +19,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     private Context context;
     private String[] iColors = {"#3F51B5","#F44336","#009688","#673AB7"};
 
-    public ContactAdapter(Context context, List<Contact> contactList){
+    private OnItemClickListener onItemClickListener;
+
+    public ContactAdapter(Context context, List<Contact> contactList,OnItemClickListener onItemClickListener){
         this.context = context;
         this.contactList = contactList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -34,12 +37,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContactAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ContactAdapter.MyViewHolder holder, final int position) {
 
         holder.iconBackground.setBackgroundColor(Color.parseColor(iColors[position % 4]));
         holder.icon.setText(String.valueOf(contactList.get(position).getContactName().charAt(0)));
         holder.contactName.setText(contactList.get(position).getContactName());
         holder.contactNumber.setText(contactList.get(position).getContactNumber());
+
+        holder.iconBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(holder.getAdapterPosition());
+            }
+        });
 
     }
 
@@ -59,6 +69,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             contactNumber = itemView.findViewById(R.id.contactNumberTextView);
             icon = itemView.findViewById(R.id.iconTextView);
             iconBackground = itemView.findViewById(R.id.iconRL);
+
         }
     }
 }

@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
     private RecyclerView recyclerView;
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ContactAdapter contactAdapter = new ContactAdapter(this,getContactList());
+        ContactAdapter contactAdapter = new ContactAdapter(this,getContactList(),this);
         recyclerView = findViewById(R.id.recyclerViewId);
         recyclerView.setAdapter(contactAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,5 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         return contactList;
 
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
     }
 }
