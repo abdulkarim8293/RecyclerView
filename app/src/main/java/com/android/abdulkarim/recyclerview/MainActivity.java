@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
+    private List<Contact> contactList;
     private RecyclerView recyclerView;
 
     @Override
@@ -19,38 +20,22 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ContactAdapter contactAdapter = new ContactAdapter(this,getContactList(),this);
+        contactList = new Data().getContactList();
+
+        ContactAdapter contactAdapter = new ContactAdapter(contactList,this);
         recyclerView = findViewById(R.id.recyclerViewId);
         recyclerView.setAdapter(contactAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
-    public List<Contact> getContactList (){
-
-        List<Contact> contactList = new ArrayList<>();
-
-        contactList.add(new Contact("Abdul Karim","+880123456789"));
-        contactList.add(new Contact("Abdul Karim","+880123445555"));
-        contactList.add(new Contact("B Name One","+8801700000000"));
-        contactList.add(new Contact("C Name Two","+8801777777777"));
-        contactList.add(new Contact("D Name Three","+8801800000000"));
-        contactList.add(new Contact("E Name Four","+8801900000000"));
-        contactList.add(new Contact("F Name Five","+8801700000000"));
-        contactList.add(new Contact("G Name Six","+8801700000000"));
-        contactList.add(new Contact("H Name Seven","+8801700000000"));
-        contactList.add(new Contact("I Name Eight","+8801700000000"));
-        contactList.add(new Contact("J Name Nine","+8801700000000"));
-        contactList.add(new Contact("K Name Ten","+8801700000000"));
-        contactList.add(new Contact("L Name Eleven","+8801700000000"));
-        contactList.add(new Contact("M Name Twelve","+8801700000000"));
-
-        return contactList;
-
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, "Time : "+contactList.get(position).getcTime(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onItemClick(int position) {
-        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
+    public void onItemLongClick(int position) {
+
     }
 }

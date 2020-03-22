@@ -16,13 +16,11 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> {
 
     private List<Contact> contactList;
-    private Context context;
     private String[] iColors = {"#3F51B5","#F44336","#009688","#673AB7"};
 
     private OnItemClickListener onItemClickListener;
 
-    public ContactAdapter(Context context, List<Contact> contactList,OnItemClickListener onItemClickListener){
-        this.context = context;
+    public ContactAdapter(List<Contact> contactList,OnItemClickListener onItemClickListener){
         this.contactList = contactList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -31,7 +29,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.item_recycler_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_view,parent,false);
         return new MyViewHolder(view);
 
     }
@@ -43,6 +41,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         holder.icon.setText(String.valueOf(contactList.get(position).getContactName().charAt(0)));
         holder.contactName.setText(contactList.get(position).getContactName());
         holder.contactNumber.setText(contactList.get(position).getContactNumber());
+        holder.cTime.setText(contactList.get(position).getcTime());
 
         holder.iconBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +59,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView icon,contactName,contactNumber;
+        private TextView icon,contactName,contactNumber,cTime;
         private RelativeLayout iconBackground;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             contactName = itemView.findViewById(R.id.contactNameTextView);
             contactNumber = itemView.findViewById(R.id.contactNumberTextView);
+            cTime = itemView.findViewById(R.id.cTimeTextView);
             icon = itemView.findViewById(R.id.iconTextView);
             iconBackground = itemView.findViewById(R.id.iconRL);
 
