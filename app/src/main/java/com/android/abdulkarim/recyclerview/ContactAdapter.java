@@ -43,13 +43,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         holder.contactNumber.setText(contactList.get(position).getContactNumber());
         holder.cTime.setText(contactList.get(position).getcTime());
 
-        holder.iconBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickListener.onItemClick(holder.getAdapterPosition());
-            }
-        });
-
     }
 
     @Override
@@ -69,6 +62,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             cTime = itemView.findViewById(R.id.cTimeTextView);
             icon = itemView.findViewById(R.id.iconTextView);
             iconBackground = itemView.findViewById(R.id.iconRL);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(getAdapterPosition());
+                }
+            });
 
         }
     }
