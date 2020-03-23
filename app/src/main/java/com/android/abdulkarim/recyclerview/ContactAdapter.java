@@ -37,7 +37,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull final ContactAdapter.MyViewHolder holder, final int position) {
 
-        holder.iconBackground.setBackgroundColor(Color.parseColor(iColors[position % 4]));
+        holder.icon.setBackgroundColor(Color.parseColor(iColors[position % 4]));
         holder.icon.setText(String.valueOf(contactList.get(position).getContactName().charAt(0)));
         holder.contactName.setText(contactList.get(position).getContactName());
         holder.contactNumber.setText(contactList.get(position).getContactNumber());
