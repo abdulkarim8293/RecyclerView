@@ -23,6 +23,7 @@ public  class Data {
         contactList.add(new Contact("K Name Ten","+8801700000000","11:07 pm"));
         contactList.add(new Contact("L Name Eleven","+8801700000000","11:30 pm"));
         contactList.add(new Contact("M Name Twelve","+8801700000000","11:50 pm"));
+        contactList.add(new Contact("M Name Twelve","+8801700000000","11:50 pm"));
 
         return contactList;
 
