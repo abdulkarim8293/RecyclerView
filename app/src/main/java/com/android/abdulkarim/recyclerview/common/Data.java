@@ -1,4 +1,6 @@
-package com.android.abdulkarim.recyclerview;
+package com.android.abdulkarim.recyclerview.common;
+
+import com.android.abdulkarim.recyclerview.model.Contact;
 
 import java.util.ArrayList;
 import java.util.List;

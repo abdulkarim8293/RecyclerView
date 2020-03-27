@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.android.abdulkarim.recyclerview.adapter.ContactAdapter;
+import com.android.abdulkarim.recyclerview.common.Data;
+import com.android.abdulkarim.recyclerview.interfaces.OnItemClickListener;
+import com.android.abdulkarim.recyclerview.model.Contact;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {

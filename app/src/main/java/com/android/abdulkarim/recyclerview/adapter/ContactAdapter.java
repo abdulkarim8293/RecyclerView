@@ -1,6 +1,5 @@
-package com.android.abdulkarim.recyclerview;
+package com.android.abdulkarim.recyclerview.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.abdulkarim.recyclerview.interfaces.OnItemClickListener;
+import com.android.abdulkarim.recyclerview.R;
+import com.android.abdulkarim.recyclerview.model.Contact;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.android.abdulkarim.recyclerview;
+package com.android.abdulkarim.recyclerview.model;
 
 public class Contact {
 
