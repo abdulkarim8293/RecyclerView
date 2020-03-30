@@ -10,9 +10,9 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_person"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="3dp"
-        android:id="@+id/recyclerViewId"/>
+        android:padding="3dp" />
 
 </RelativeLayout>

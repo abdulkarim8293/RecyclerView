@@ -1,45 +1,43 @@
 package com.android.abdulkarim.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.android.abdulkarim.recyclerview.adapter.ContactAdapter;
-import com.android.abdulkarim.recyclerview.common.Data;
-import com.android.abdulkarim.recyclerview.interfaces.OnItemClickListener;
-import com.android.abdulkarim.recyclerview.model.Contact;
+import com.android.abdulkarim.recyclerview.adapter.PersonAdapter;
+import com.android.abdulkarim.recyclerview.common.Common;
+import com.android.abdulkarim.recyclerview.common.LinearLayoutManagerWithSmoothScroller;
+import com.android.abdulkarim.recyclerview.model.Person;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private List<Contact> contactList;
-    private RecyclerView recyclerView;
+    private RecyclerView recycler_person;
+    private LinearLayoutManager layoutManager;
+    private ArrayList<Person> people = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        contactList = new Data().getContactList();
-
-        ContactAdapter contactAdapter = new ContactAdapter(contactList,this);
-        recyclerView = findViewById(R.id.recyclerViewId);
-        recyclerView.setAdapter(contactAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recycler_person = findViewById(R.id.recycler_person);
+        layoutManager = new LinearLayoutManagerWithSmoothScroller(this);
+        recycler_person.setLayoutManager(layoutManager);
+        recycler_person.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
+        createPersonList();
+        PersonAdapter adapter = new PersonAdapter(this,people);
+        recycler_person.setAdapter(adapter);
 
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(this, "Time : "+contactList.get(position).getcTime(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onItemLongClick(int position) {
-
+    private void createPersonList(){
+        people = Common.getPeopleGroup();
+        people = Common.sortList(people);
+        people = Common.addAlphabets(people);
     }
 }
