@@ -5,17 +5,27 @@ public class Person {
     private String name;
     private String number;
     private int viewType;
+    private Integer profileImage;
 
     public Person() {
 
     }
 
-    public Person(String name, String number, int viewType) {
+    public Person(String name, String number,Integer profileImage, int viewType) {
         this.name = name;
         this.number = number;
         this.viewType = viewType;
+        this.profileImage = profileImage;
     }
 
+
+    public Integer getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(Integer profileImage) {
+        this.profileImage = profileImage;
+    }
 
     public String getName() {
         return name;

@@ -22,8 +22,8 @@ import java.util.List;
 
 public class PersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    Context context;
-    List<Person> personList;
+    private Context context;
+    private List<Person> personList;
 
     public PersonAdapter(Context context, List<Person> personList) {
         this.context = context;
@@ -66,21 +66,20 @@ public class PersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof GroupViewHolder){
             GroupViewHolder groupViewHolder = (GroupViewHolder) holder;
             groupViewHolder.text_group_title.setText(personList.get(position).getName());
-            groupViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //((Activity)context).startActivityForResult(new Intent(context, AlphabetActivity.class),Common.RESULT_CODE);
-                }
-            });
+
         }else if (holder instanceof PersonViewHolder){
 
             PersonViewHolder personViewHolder = (PersonViewHolder) holder;
             personViewHolder.text_person_name.setText(personList.get(position).getName());
             personViewHolder.text_person_position.setText(personList.get(position).getNumber());
 
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            TextDrawable drawable = TextDrawable.builder().buildRound(String.valueOf(personList.get(position).getName().charAt(0)),generator.getRandomColor());
-            personViewHolder.image_person_avatar.setImageDrawable(drawable);
+            if (personList.get(position).getProfileImage() == null){
+                ColorGenerator generator = ColorGenerator.MATERIAL;
+                TextDrawable drawable = TextDrawable.builder().buildRound(String.valueOf(personList.get(position).getName().charAt(0)),generator.getRandomColor());
+                personViewHolder.image_person_avatar.setImageDrawable(drawable);
+            }else {
+                personViewHolder.image_person_avatar.setImageResource(personList.get(position).getProfileImage());
+            }
 
         }
 

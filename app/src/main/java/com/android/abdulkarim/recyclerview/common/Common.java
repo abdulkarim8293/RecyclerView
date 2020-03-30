@@ -1,5 +1,6 @@
 package com.android.abdulkarim.recyclerview.common;
 
+import com.android.abdulkarim.recyclerview.R;
 import com.android.abdulkarim.recyclerview.model.Person;
 
 import java.util.ArrayList;
@@ -78,45 +79,18 @@ public  class Common {
     public static ArrayList<Person> getPeopleGroup() {
         ArrayList<Person> personList = new ArrayList<>();
 
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("B","0123456789",-1));
-        personList.add(new Person("C","0123456789",-1));
-        personList.add(new Person("D","0123456789",-1));
-        personList.add(new Person("E","0123456789r",-1));
-        personList.add(new Person("F","0123456789",-1));
-        personList.add(new Person("G","0123456789",-1));
-        personList.add(new Person("H","0123456789",-1));
-        personList.add(new Person("I","0123456789",-1));
-        personList.add(new Person("J","0123456789",-1));
-        personList.add(new Person("K","0123456789",-1));
-        personList.add(new Person("L","0123456789",-1));
-        personList.add(new Person("M","0123456789",-1));
-        personList.add(new Person("N","0123456789",-1));
-        personList.add(new Person("O","0123456789",-1));
-        personList.add(new Person("P","0123456789",-1));
-        personList.add(new Person("Q","0123456789",-1));
-        personList.add(new Person("R","0123456789",-1));
-        personList.add(new Person("S","0123456789",-1));
-        personList.add(new Person("T","0123456789",-1));
-        personList.add(new Person("U","0123456789",-1));
-        personList.add(new Person("V","0123456789",-1));
-        personList.add(new Person("W","0123456789",-1));
-        //personList.add(new Person("X","0123456789",-1));
-        personList.add(new Person("Y","0123456789",-1));
-        personList.add(new Person("Z","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Abdul Karim","0123456789",-1));
-        personList.add(new Person("Two","0123456789",-1));
-        personList.add(new Person("Three","0123456789",-1));
-        personList.add(new Person("Four","0123456789",-1));
-        personList.add(new Person("Five","0123456789",-1));
-        personList.add(new Person("Six","0123456789",-1));
+        personList.add(new Person("Abdul Karim","0123456789",null,-1));
+        personList.add(new Person("Abdul Karim","0123456789",null,-1));
+        personList.add(new Person("Abdul Karim","0123456789", R.drawable.karim_profile_image,-1));
+        personList.add(new Person("Abdul Karim","0123456789",null,-1));
+        personList.add(new Person("Abdul Karim","0123456789",null,-1));
+        personList.add(new Person("Abdul Karim","0123456789", R.drawable.orin_profile_image,-1));
+        personList.add(new Person("Taslima Yesmin Orin","0123456789", R.drawable.orin_profile_image,-1));
+        personList.add(new Person("B","0123456789",null,-1));
+        personList.add(new Person("B","0123456789",null,-1));
+        personList.add(new Person("B","0123456789",null,-1));
+        personList.add(new Person("C","0123456789",null,-1));
+        personList.add(new Person("D","0123456789",null,-1));
 
         return personList;
     }
