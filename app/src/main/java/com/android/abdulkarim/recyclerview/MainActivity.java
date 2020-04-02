@@ -1,43 +1,59 @@
 package com.android.abdulkarim.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
-import com.android.abdulkarim.recyclerview.adapter.PersonAdapter;
+import com.android.abdulkarim.recyclerview.adapter.ContactAdapter;
 import com.android.abdulkarim.recyclerview.common.Common;
 import com.android.abdulkarim.recyclerview.common.LinearLayoutManagerWithSmoothScroller;
-import com.android.abdulkarim.recyclerview.model.Person;
+import com.android.abdulkarim.recyclerview.interfaces.OnItemClickListener;
+import com.android.abdulkarim.recyclerview.model.Contact;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
-    private RecyclerView recycler_person;
+    private RecyclerView contacts_recycler_view ;
     private LinearLayoutManager layoutManager;
-    private ArrayList<Person> people = new ArrayList<>();
+    private ArrayList<Contact> contacts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recycler_person = findViewById(R.id.recycler_person);
+        createContactList();
+        contacts_recycler_view = findViewById(R.id.contacts_recycler_view_id);
         layoutManager = new LinearLayoutManagerWithSmoothScroller(this);
-        recycler_person.setLayoutManager(layoutManager);
-        recycler_person.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
-        createPersonList();
-        PersonAdapter adapter = new PersonAdapter(this,people);
-        recycler_person.setAdapter(adapter);
-
+        contacts_recycler_view.setLayoutManager(layoutManager);
+        contacts_recycler_view.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
+        ContactAdapter adapter = new ContactAdapter(this,contacts,this);
+        contacts_recycler_view.setAdapter(adapter);
     }
 
-    private void createPersonList(){
-        people = Common.getPeopleGroup();
-        people = Common.sortList(people);
-        people = Common.addAlphabets(people);
+    private void createContactList(){
+
+        contacts = Common.getPeopleGroup();
+        contacts = Common.sortList(contacts);
+        contacts = Common.addAlphabets(contacts);
+    }
+
+    @Override
+    public void onItemClick(View view, Contact contact, int position) {
+        Toast.makeText(this, ""+contact.getName()+"\nNumber is : "+contact.getNumber(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemLongClick(View view, Contact contact, int position) {
+
+        Toast.makeText(this, ""+contact.getName(), Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -1,17 +1,17 @@
 package com.android.abdulkarim.recyclerview.model;
 
-public class Person {
+public class Contact {
 
     private String name;
     private String number;
     private int viewType;
     private Integer profileImage;
 
-    public Person() {
+    public Contact() {
 
     }
 
-    public Person(String name, String number,Integer profileImage, int viewType) {
+    public Contact(String name, String number, Integer profileImage, int viewType) {
         this.name = name;
         this.number = number;
         this.viewType = viewType;

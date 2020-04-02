@@ -1,7 +1,7 @@
 package com.android.abdulkarim.recyclerview.common;
 
 import com.android.abdulkarim.recyclerview.R;
-import com.android.abdulkarim.recyclerview.model.Person;
+import com.android.abdulkarim.recyclerview.model.Contact;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,22 +12,21 @@ public  class Common {
 
     public static final int VIEW_TYPE_GROUP = 0;
     public static final int VIEW_TYPE_PERSON = 1;
-    public static final int RESULT_CODE = 1000;
 
     public static List<String> alphabet_available = new ArrayList<>();
 
-    public static ArrayList<Person> addAlphabets (ArrayList<Person> list){
-        int i = 0;
+    public static ArrayList<Contact> addAlphabets (ArrayList<Contact> list){
 
-        ArrayList<Person> customList = new ArrayList<>();
-        Person firstPosition = new Person();
+        int i = 0;
+        ArrayList<Contact> customList = new ArrayList<>();
+        Contact firstPosition = new Contact();
         firstPosition.setName(String.valueOf(list.get(0).getName().charAt(0)));
         firstPosition.setViewType(VIEW_TYPE_GROUP);
         alphabet_available.add(String.valueOf(list.get(0).getName().charAt(0))); // add first character group header list;
         customList.add(firstPosition);
 
         for (i=0; i < list.size() - 1; i++){
-            Person person = new Person();
+            Contact person = new Contact();
             char name1 = list.get(i).getName().charAt(0); // get first character in name;
             char name2 = list.get(i+1).getName().charAt(0);
             if (name1 == name2){
@@ -47,7 +46,7 @@ public  class Common {
         return customList;
     }
 
-    public static int findPositionWithName(String name,ArrayList<Person> list){
+    public static int findPositionWithName(String name,ArrayList<Contact> list){
         for (int i = 0; i<list.size(); i++){
             if (list.get(i).getName().equals(name)){
                 return i;
@@ -65,10 +64,10 @@ public  class Common {
         return result;
     }
 
-    public static ArrayList<Person> sortList (ArrayList<Person> people){
-        Collections.sort(people, new Comparator<Person>() {
+    public static ArrayList<Contact> sortList (ArrayList<Contact> people){
+        Collections.sort(people, new Comparator<Contact>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(Contact o1, Contact o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
@@ -76,21 +75,20 @@ public  class Common {
         return people;
     }
 
-    public static ArrayList<Person> getPeopleGroup() {
-        ArrayList<Person> personList = new ArrayList<>();
+    public static ArrayList<Contact> getPeopleGroup() {
+        ArrayList<Contact> personList = new ArrayList<>();
 
-        personList.add(new Person("Abdul Karim","0123456789",null,-1));
-        personList.add(new Person("Abdul Karim","0123456789",null,-1));
-        personList.add(new Person("Abdul Karim","0123456789", R.drawable.karim_profile_image,-1));
-        personList.add(new Person("Abdul Karim","0123456789",null,-1));
-        personList.add(new Person("Abdul Karim","0123456789",null,-1));
-        personList.add(new Person("Abdul Karim","0123456789", R.drawable.orin_profile_image,-1));
-        personList.add(new Person("Taslima Yesmin Orin","0123456789", R.drawable.orin_profile_image,-1));
-        personList.add(new Person("B","0123456789",null,-1));
-        personList.add(new Person("B","0123456789",null,-1));
-        personList.add(new Person("B","0123456789",null,-1));
-        personList.add(new Person("C","0123456789",null,-1));
-        personList.add(new Person("D","0123456789",null,-1));
+        personList.add(new Contact("Abdul Karim","0123456789",null,-1));
+        personList.add(new Contact("Abdul Karim","0123456789",null,-1));
+        personList.add(new Contact("Abdul Karim","0123456789", R.drawable.karim_profile_image,-1));
+        personList.add(new Contact("Abdul Karim","0123456789",null,-1));
+        personList.add(new Contact("Abdul Karim","0123456789", R.drawable.orin_profile_image,-1));
+        personList.add(new Contact("Taslima Yesmin Orin","0123456789", R.drawable.orin_profile_image,-1));
+        personList.add(new Contact("B","0123456789",null,-1));
+        personList.add(new Contact("B","0123456789",null,-1));
+        personList.add(new Contact("B","0123456789",null,-1));
+        personList.add(new Contact("C","0123456789",null,-1));
+        personList.add(new Contact("D","0123456789",null,-1));
 
         return personList;
     }
