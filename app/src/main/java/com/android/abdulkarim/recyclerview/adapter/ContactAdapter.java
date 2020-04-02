@@ -1,6 +1,7 @@
 package com.android.abdulkarim.recyclerview.adapter;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<Contact> contactList;
 
     private OnItemClickListener onItemClickListener;
+    private SparseBooleanArray selected_items;
+    private int current_selected_idx = -1;
 
     public ContactAdapter(Context context, List<Contact> contactList,OnItemClickListener onItemClickListener) {
         this.context = context;
@@ -104,6 +107,20 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return contactList.size();
+    }
+
+    public void toggleSelection(int pos) {
+        current_selected_idx = pos;
+        if (selected_items.get(pos, false)) {
+            selected_items.delete(pos);
+        } else {
+            selected_items.put(pos, true);
+        }
+        notifyItemChanged(pos);
+    }
+
+    public int getSelectedItemCount() {
+        return selected_items.size();
     }
 
     private class GroupViewHolder extends RecyclerView.ViewHolder{

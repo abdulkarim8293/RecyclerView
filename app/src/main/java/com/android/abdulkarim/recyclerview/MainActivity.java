@@ -1,6 +1,7 @@
 package com.android.abdulkarim.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.abdulkarim.recyclerview.adapter.ContactAdapter;
+import com.android.abdulkarim.recyclerview.common.ActionModeCallback;
 import com.android.abdulkarim.recyclerview.common.Common;
 import com.android.abdulkarim.recyclerview.common.LinearLayoutManagerWithSmoothScroller;
 import com.android.abdulkarim.recyclerview.interfaces.OnItemClickListener;
@@ -23,6 +25,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private RecyclerView contacts_recycler_view ;
     private LinearLayoutManager layoutManager;
     private ArrayList<Contact> contacts = new ArrayList<>();
+    private ContactAdapter adapter;
+
+
+    private ActionMode actionMode;
+    private ActionModeCallback actionModeCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         layoutManager = new LinearLayoutManagerWithSmoothScroller(this);
         contacts_recycler_view.setLayoutManager(layoutManager);
         contacts_recycler_view.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
-        ContactAdapter adapter = new ContactAdapter(this,contacts,this);
+        adapter = new ContactAdapter(this,contacts,this);
         contacts_recycler_view.setAdapter(adapter);
+
+        actionModeCallback = new ActionModeCallback();
     }
 
     private void createContactList(){
@@ -54,6 +63,26 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public void onItemLongClick(View view, Contact contact, int position) {
 
         Toast.makeText(this, ""+contact.getName(), Toast.LENGTH_SHORT).show();
+        enableActionMode(position);
 
+    }
+
+    private void enableActionMode(int position) {
+        if (actionMode == null) {
+            actionMode = startSupportActionMode(actionModeCallback);
+        }
+        toggleSelection(position);
+    }
+
+    private void toggleSelection(int position) {
+        adapter.toggleSelection(position);
+        int count = adapter.getSelectedItemCount();
+
+        if (count == 0) {
+            actionMode.finish();
+        } else {
+            actionMode.setTitle(String.valueOf(count));
+            actionMode.invalidate();
+        }
     }
 }
