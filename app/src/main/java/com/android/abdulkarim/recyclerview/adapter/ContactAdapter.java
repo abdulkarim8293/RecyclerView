@@ -1,11 +1,14 @@
 package com.android.abdulkarim.recyclerview.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,8 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.context = context;
         this.contactList = contactList;
         this.onItemClickListener = onItemClickListener;
+
+        selected_items = new SparseBooleanArray();
     }
 
 
@@ -86,22 +91,20 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }else {
                 personViewHolder.image_person_avatar.setImageResource(contactList.get(position).getProfileImage());
             }
+
+            toggleCheckedIcon(holder, position);
         }
+
+
 
         final Contact contact = contactList.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(v,contact,holder.getAdapterPosition());
+                onItemClickListener.onItemClick(contact,holder.getAdapterPosition());
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                onItemClickListener.onItemLongClick(v, contact, holder.getAdapterPosition());
-                return true;
-            }
-        });
+
     }
 
     @Override
@@ -123,6 +126,32 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return selected_items.size();
     }
 
+    public void clearSelections() {
+        selected_items.clear();
+        notifyDataSetChanged();
+    }
+
+    private void toggleCheckedIcon(RecyclerView.ViewHolder holder, int position) {
+
+        PersonViewHolder personViewHolder = (PersonViewHolder) holder;
+
+        if (selected_items.get(position, false)) {
+
+            //personViewHolder.image_person_avatar.setVisibility(View.GONE);
+            //holder.lyt_checked.setVisibility(View.VISIBLE);
+            if (current_selected_idx == position) resetCurrentIndex();
+        } else {
+            //holder.lyt_checked.setVisibility(View.GONE);
+            //holder.lyt_image.setVisibility(View.VISIBLE);
+            if (current_selected_idx == position) resetCurrentIndex();
+        }
+    }
+
+
+    private void resetCurrentIndex() {
+        current_selected_idx = -1;
+    }
+
     private class GroupViewHolder extends RecyclerView.ViewHolder{
 
         TextView text_group_title;
@@ -137,12 +166,15 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         TextView text_person_name,text_person_position;
         ImageView image_person_avatar;
+        LinearLayout linearLayout;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
             text_person_name = itemView.findViewById(R.id.text_person_name);
             text_person_position = itemView.findViewById(R.id.text_person_position);
             image_person_avatar = itemView.findViewById(R.id.person_avatar);
+
+            linearLayout = itemView.findViewById(R.id.layout);
 
         }
     }

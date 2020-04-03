@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private ArrayList<Contact> contacts = new ArrayList<>();
     private ContactAdapter adapter;
 
-
-    private ActionMode actionMode;
-    private ActionModeCallback actionModeCallback;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         adapter = new ContactAdapter(this,contacts,this);
         contacts_recycler_view.setAdapter(adapter);
 
-        actionModeCallback = new ActionModeCallback();
+
     }
 
     private void createContactList(){
@@ -63,26 +61,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public void onItemLongClick(View view, Contact contact, int position) {
 
         Toast.makeText(this, ""+contact.getName(), Toast.LENGTH_SHORT).show();
-        enableActionMode(position);
 
-    }
-
-    private void enableActionMode(int position) {
-        if (actionMode == null) {
-            actionMode = startSupportActionMode(actionModeCallback);
-        }
-        toggleSelection(position);
-    }
-
-    private void toggleSelection(int position) {
-        adapter.toggleSelection(position);
-        int count = adapter.getSelectedItemCount();
-
-        if (count == 0) {
-            actionMode.finish();
-        } else {
-            actionMode.setTitle(String.valueOf(count));
-            actionMode.invalidate();
-        }
     }
 }
