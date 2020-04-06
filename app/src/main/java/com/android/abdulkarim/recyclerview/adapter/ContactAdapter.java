@@ -34,17 +34,15 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
-        if (viewType == Common.VIEW_TYPE_GROUP) {
+        if (viewType == Common.VIEW_TYPE_CONTACT_GROUP) {
             ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_group_item_layout, viewGroup, false);
             ContactGroupViewHolder contactGroupViewHolder = new ContactGroupViewHolder(group);
             return contactGroupViewHolder;
-        } else if (viewType == Common.VIEW_TYPE_PERSON) {
-
+        } else if (viewType == Common.VIEW_TYPE_CONTACT) {
             ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_item_layout, viewGroup, false);
             ContactViewHolder contactViewHolder = new ContactViewHolder(group);
             return contactViewHolder;
         } else {
-
             ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_group_item_layout, viewGroup, false);
             ContactGroupViewHolder contactGroupViewHolder = new ContactGroupViewHolder(group);
             return contactGroupViewHolder;
@@ -66,7 +64,6 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             contactGroupViewHolder.contact_group_title.setText(contactList.get(position).getName());
 
         } else if (holder instanceof ContactViewHolder) {
-
             ContactViewHolder contactViewHolder = (ContactViewHolder) holder;
             contactViewHolder.contactName.setText(contactList.get(position).getName());
             contactViewHolder.contactNumber.setText(contactList.get(position).getNumber());

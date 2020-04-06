@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void getContactList() {
-        contacts = Common.getPeopleGroup();
-        contacts = Common.sortList(contacts);
-        contacts = Common.addAlphabets(contacts);
+        contacts = Common.getAllContacts();
+        contacts = Common.sortContactList(contacts);
+        contacts = Common.addAlphabetToGroupHeader(contacts);
     }
 }
