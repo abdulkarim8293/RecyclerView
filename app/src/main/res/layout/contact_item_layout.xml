@@ -11,28 +11,29 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/person_avatar"
+            android:id="@+id/contact_image_id"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginRight="5dp" />
 
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_person_name"
+                android:id="@+id/contact_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:text="Abdul Karim"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/text_person_position"
+                android:id="@+id/contact_number_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01234"

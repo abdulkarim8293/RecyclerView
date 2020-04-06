@@ -19,35 +19,37 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
-    private RecyclerView contacts_recycler_view ;
+    private RecyclerView contacts_recycler_view;
     private LinearLayoutManager layoutManager;
     private ArrayList<Contact> contacts = new ArrayList<>();
-    private ContactAdapter adapter;
+    private ContactAdapter contactAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        createContactList();
+        getContactList();
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
         contacts_recycler_view = findViewById(R.id.contacts_recycler_view_id);
         layoutManager = new LinearLayoutManagerWithSmoothScroller(this);
         contacts_recycler_view.setLayoutManager(layoutManager);
-        contacts_recycler_view.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
-        adapter = new ContactAdapter(contacts,this);
-        contacts_recycler_view.setAdapter(adapter);
-    }
-
-    private void createContactList(){
-
-        contacts = Common.getPeopleGroup();
-        contacts = Common.sortList(contacts);
-        contacts = Common.addAlphabets(contacts);
+        contacts_recycler_view.addItemDecoration(new DividerItemDecoration(this, layoutManager.getOrientation()));
+        contactAdapter = new ContactAdapter(contacts, this);
+        contacts_recycler_view.setAdapter(contactAdapter);
     }
 
     @Override
     public void onItemClick(Contact contact, int position) {
-        Toast.makeText(this, ""+contact.getName()+"\nNumber is : "+contact.getNumber(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Name is : " + contact.getName() + "\nNumber is : " + contact.getNumber(), Toast.LENGTH_SHORT).show();
     }
 
+    private void getContactList() {
+        contacts = Common.getPeopleGroup();
+        contacts = Common.sortList(contacts);
+        contacts = Common.addAlphabets(contacts);
+    }
 }

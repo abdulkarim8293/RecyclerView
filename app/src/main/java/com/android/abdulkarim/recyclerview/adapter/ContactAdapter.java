@@ -1,16 +1,10 @@
 package com.android.abdulkarim.recyclerview.adapter;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,19 +35,19 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
         if (viewType == Common.VIEW_TYPE_GROUP) {
-            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.group_layout, viewGroup, false);
-            GroupViewHolder groupViewHolder = new GroupViewHolder(group);
-            return groupViewHolder;
+            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_group_item_layout, viewGroup, false);
+            ContactGroupViewHolder contactGroupViewHolder = new ContactGroupViewHolder(group);
+            return contactGroupViewHolder;
         } else if (viewType == Common.VIEW_TYPE_PERSON) {
 
-            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.person_layout, viewGroup, false);
-            PersonViewHolder personViewHolder = new PersonViewHolder(group);
-            return personViewHolder;
+            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_item_layout, viewGroup, false);
+            ContactViewHolder contactViewHolder = new ContactViewHolder(group);
+            return contactViewHolder;
         } else {
 
-            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.group_layout, viewGroup, false);
-            GroupViewHolder groupViewHolder = new GroupViewHolder(group);
-            return groupViewHolder;
+            ViewGroup group = (ViewGroup) inflater.inflate(R.layout.contact_group_item_layout, viewGroup, false);
+            ContactGroupViewHolder contactGroupViewHolder = new ContactGroupViewHolder(group);
+            return contactGroupViewHolder;
         }
     }
 
@@ -67,30 +61,31 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         final Contact contact = contactList.get(position);
 
-        if (holder instanceof GroupViewHolder) {
-            GroupViewHolder groupViewHolder = (GroupViewHolder) holder;
-            groupViewHolder.text_group_title.setText(contactList.get(position).getName());
+        if (holder instanceof ContactGroupViewHolder) {
+            ContactGroupViewHolder contactGroupViewHolder = (ContactGroupViewHolder) holder;
+            contactGroupViewHolder.contact_group_title.setText(contactList.get(position).getName());
 
-        } else if (holder instanceof PersonViewHolder) {
+        } else if (holder instanceof ContactViewHolder) {
 
-            PersonViewHolder personViewHolder = (PersonViewHolder) holder;
-            personViewHolder.text_person_name.setText(contactList.get(position).getName());
-            personViewHolder.text_person_position.setText(contactList.get(position).getNumber());
+            ContactViewHolder contactViewHolder = (ContactViewHolder) holder;
+            contactViewHolder.contactName.setText(contactList.get(position).getName());
+            contactViewHolder.contactNumber.setText(contactList.get(position).getNumber());
 
             if (contactList.get(position).getProfileImage() == null) {
                 ColorGenerator generator = ColorGenerator.MATERIAL;
                 TextDrawable drawable = TextDrawable.builder().buildRound(String.valueOf(contactList.get(position).getName().charAt(0)), generator.getRandomColor());
-                personViewHolder.image_person_avatar.setImageDrawable(drawable);
+                contactViewHolder.contactImage.setImageDrawable(drawable);
             } else {
-                personViewHolder.image_person_avatar.setImageResource(contactList.get(position).getProfileImage());
+                contactViewHolder.contactImage.setImageResource(contactList.get(position).getProfileImage());
             }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(contact, holder.getAdapterPosition());
+                }
+            });
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickListener.onItemClick(contact, holder.getAdapterPosition());
-            }
-        });
     }
 
     @Override
@@ -98,26 +93,26 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return contactList.size();
     }
 
-    private class GroupViewHolder extends RecyclerView.ViewHolder {
+    private class ContactGroupViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text_group_title;
+        TextView contact_group_title;
 
-        public GroupViewHolder(@NonNull View itemView) {
+        public ContactGroupViewHolder(@NonNull View itemView) {
             super(itemView);
-            text_group_title = itemView.findViewById(R.id.text_group_title);
+            contact_group_title = itemView.findViewById(R.id.contact_group_title_id);
         }
     }
 
-    private class PersonViewHolder extends RecyclerView.ViewHolder {
+    private class ContactViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text_person_name, text_person_position;
-        ImageView image_person_avatar;
+        TextView contactName, contactNumber;
+        ImageView contactImage;
 
-        public PersonViewHolder(@NonNull View itemView) {
+        public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
-            text_person_name = itemView.findViewById(R.id.text_person_name);
-            text_person_position = itemView.findViewById(R.id.text_person_position);
-            image_person_avatar = itemView.findViewById(R.id.person_avatar);
+            contactName = itemView.findViewById(R.id.contact_name_id);
+            contactNumber = itemView.findViewById(R.id.contact_number_id);
+            contactImage = itemView.findViewById(R.id.contact_image_id);
         }
     }
 }
